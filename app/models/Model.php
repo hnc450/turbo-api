@@ -3,7 +3,7 @@
 
   class Model
   {
-    protected string $table = "";
+    protected string $table = "models";
 
     public function all(){
       

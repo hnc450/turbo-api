@@ -2,6 +2,7 @@
 
 use Container\Dic;
 use Helper\Build\Database;
+use Helper\Build\Query;
 use Router\Router;
 
    require dirname(__DIR__). DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
@@ -11,6 +12,7 @@ use Router\Router;
    Database::Instance()->run();
 
    Dic::set(Database::class, Database::Instance());
+   Dic::set(Query::class, new Query());
    
    Router::matcher();
 ?>

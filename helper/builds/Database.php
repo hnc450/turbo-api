@@ -39,9 +39,18 @@
     }
 
     public function prepare(string $request , $params = []){
-        $smt = $this->connexion->prepare($request);
-        $smt->execute($params);
-        return $smt;
+        try{
+              $smt = $this->connexion->prepare($request);
+              $smt->execute($params);
+              return $smt;
+        }
+        
+        catch(\PDOException $e){
+            // error_log($e->getMessage());
+            // throw $e;
+        }
+      
+   
     }
   }
 ?>
