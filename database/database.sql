@@ -2,7 +2,7 @@ CREATE DATABASE `turbo`;
 USE `turbo`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uuid` TEXT NOT NULL UNIQUE,
+  `uuid` varchar(20) NOT NULL UNIQUE,
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -13,22 +13,22 @@ CREATE TABLE `users` (
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uuid` TEXT NOT NULL UNIQUE,
+  `uuid` varchar(10) NOT NULL UNIQUE,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `market`(
     `id` int(11) NOT NULL AUTO_INCREMENT,
-    `uuid` TEXT NOT NULL UNIQUE,
+    `uuid` varchar(10) NOT NULL UNIQUE,
     `name` varchar(255) NOT NULL,
-     PRIMARY KEY (`id`)
+     PRIMARY KEY (`id`),
     `location` varchar(255) NOT NULL
 );
 
 CREATE TABLE `boutiques` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uuid` TEXT NOT NULL UNIQUE,
+  `uuid` varchar(20) NOT NULL UNIQUE,
   `name` varchar(255) NOT NULL,
   `description` TEXT,
   `seller_id` int(11) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `boutiques` (
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uuid` TEXT NOT NULL UNIQUE,
+  `uuid` varchar(10) NOT NULL UNIQUE,
   `name` varchar(255) NOT NULL,
   `description` TEXT,
   `price` decimal(10,2) NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE `products` (
 
 CREATE TABLE `avis`(
     `id` int(11) NOT NULL AUTO_INCREMENT,
-    `uuid` TEXT NOT NULL UNIQUE,
+    `uuid` varchar(10) NOT NULL UNIQUE,
     `comment` TEXT,
     `user_id` int(11) NOT NULL,
     `product_id` int(11) NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE `avis`(
 
 CREATE TABLE `favorites`(
     `id` int(11) NOT NULL AUTO_INCREMENT,
-    `uuid` TEXT NOT NULL UNIQUE,
+    `uuid` varchar(10) NOT NULL UNIQUE,
     `user_id` int(11) NOT NULL,
     `product_id` int(11) NOT NULL,
     `rating` int(1) NOT NULL,

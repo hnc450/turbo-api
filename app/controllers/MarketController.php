@@ -7,8 +7,8 @@ use App\models\MarketModel;
 
     public function create() {
         $market = new MarketModel();
-        $market->name = 'Coete';
-        $market->location = 'Kinshasa , Victoire';
+        $market->name = 'Botour';
+        $market->location = 'Kinshasa , en ville';
         $market->save();
         return $this->status(201)->json(['message' => 'Market created successfully']);
     }
