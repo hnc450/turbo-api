@@ -18,6 +18,11 @@ use App\models\UserModel;
          $user->save();
          self::status(201)->json(['message' => 'User created successfully']);
      }
+     
+     public function index(){
+         $user = new UserModel();
+         self::status(200)->json($user->all());
+     }
    
  }
 ?>

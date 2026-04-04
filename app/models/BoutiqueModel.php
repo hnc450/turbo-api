@@ -20,7 +20,8 @@ class BoutiqueModel extends Model {
             ':seller' => $this->seller_id,
             ':market' => $this->market_id
           ]
-        )        
+        );
+                
       }
 }
 ?>

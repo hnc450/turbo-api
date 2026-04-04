@@ -1,6 +1,6 @@
 <?php
 
-use App\controllers\{BoutiqueController, Controller,UserController,MarketController};
+use App\controllers\{BoutiqueController, Controller,UserController,MarketController,CategorieController};
 
 use Router\Router;
 use Service\AuthService;
@@ -11,27 +11,19 @@ use Service\AuthService;
 
   Router::get('/api/database',function(){
     $query = new \Helper\Build\Query();
-    $query->insert("
-
-CREATE TABLE `favorites`(
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `uuid` varchar(10) NOT NULL UNIQUE,
-    `user_id` int(11) NOT NULL,
-    `product_id` int(11) NOT NULL,
-    `rating` int(1) NOT NULL,
-    
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE CASCADE
-);
-    ");
+    $query->insert("");
        
   });
+  
+  Router::get('/api/users',[UserController::class,'index']);
+  Router::get('/api/boutiques',[BoutiqueController::class,'index']);
+  Router::get('/api/markets',[MarketController::class,'index']);
+  Router::get('/api/categories',[CategorieController::class,'index']);
 
   Router::post('/api/create/market',[MarketController::class,'create']);
   Router::post('/api/create/user',[UserController::class,'create']);
-  //\ à  implementer prochainement
-  // Router::post('/api/create/boutique',[BoutiqueController::class,'create']);
+  Router::post('/api/create/boutique',[BoutiqueController::class,'create']);
+  Router::post('/api/create/categorie',[CategorieController::class, 'create']);
   
   Router::post('/api/login',[AuthService::class,'login']);
   Router::post('/api/register',[AuthService::class,'register']);

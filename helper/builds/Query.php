@@ -3,6 +3,7 @@
 
   use Container\Dic;
 
+
   class Query {
 
     private $database;
@@ -12,8 +13,8 @@
     {
        $this->database = Dic::get(Database::class); 
     }
-    public function get($table){
-     return $this->database->query("SELECT * FROM $table")->fetchAll();
+    public function get($table,$mode =\PDO::FETCH_ASSOC){
+     return $this->database->query("SELECT * FROM $table")->fetchAll($mode);
     }
     
     public function fetch($table){

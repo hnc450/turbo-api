@@ -4,7 +4,12 @@
 use App\models\MarketModel;
 
  class MarketController extends Controller {
-
+ 
+    public function index(){
+       $market = new MarketModel();
+       self::status(200)->json($market->all());
+    }
+    
     public function create() {
         $market = new MarketModel();
         $market->name = 'Botour';
@@ -12,6 +17,7 @@ use App\models\MarketModel;
         $market->save();
         return $this->status(201)->json(['message' => 'Market created successfully']);
     }
+    
 
  }
 ?>
