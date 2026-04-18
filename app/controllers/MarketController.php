@@ -1,23 +1,41 @@
-<?php 
-  namespace App\controllers;
+<?php
 
+namespace App\controllers;
+
+use Container\Dic;
+use Helper\Build\QueryBuilder;
 use App\models\MarketModel;
 
- class MarketController extends Controller {
- 
-    public function index(){
-       $market = new MarketModel();
-       self::status(200)->json($market->all());
+class MarketController extends Controller
+{
+    public function index()
+    {
+        $market = new MarketModel();
+        self::status(200)->json($market->all());
     }
-    
-    public function create() {
+
+    public function create()
+    {
         $market = new MarketModel();
         $market->name = 'Botour';
         $market->location = 'Kinshasa , en ville';
         $market->save();
         return $this->status(201)->json(['message' => 'Market created successfully']);
     }
-    
 
- }
-?>
+    public function delete($uuid)
+    {
+        $uuid = (string)$uuid['uuid'];
+
+        if ($this->get("market", "uuid", $uuid)) {
+            Dic::get(QueryBuilder::class)->delete('market')->where("uuid", $uuid)->run();
+            $this->status(201)->json(['message' => 'market deleted with successfully']);
+            return;
+        } else {
+            $this->status(404)->json(['message' => 'market already deleted or not exist']);
+            return;
+        }
+
+    }
+
+}
