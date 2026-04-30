@@ -6,40 +6,34 @@
    class Router
    {
 
-      private static string $route_name = "";
-
-      public static function name(string $name)
-      {
-        self::$route_name = $name;
-      }
-       public static function get(string $route, $target)
+       public static function get(string $route, mixed $target, string $name = '')
        {
-          App::getInstanceRouter()->map('GET',$route,$target,self::$route_name);
+          App::getInstanceRouter()->map('GET',$route,$target,$name);
        }
 
-       public static function post(string $route, $target)
+       public static function post(string $route, mixed   $target, string $name = '')
        {
-        App::getInstanceRouter()->map('POST',$route,$target,self::$route_name);
+        App::getInstanceRouter()->map('POST',$route,$target,$name);
        }
 
-       public static function delete(string $route, $target, string $name = '')
+       public static function delete(string $route, mixed $target, string $name = '')
        {
-        App::getInstanceRouter()->map('DELETE',$route,$target,self::$route_name);
+        App::getInstanceRouter()->map('DELETE',$route,$target,$name);
        }
 
-       public static function put(string $route, $target)
+       public static function put(string $route, mixed $target, string $name = '')
        {
-        App::getInstanceRouter()->map('PUT',$route,$target,self::$route_name);
+        App::getInstanceRouter()->map('PUT',$route,$target,$name);
        }
        
-       public function origin($path)
+       public function origin(string $path)
        {
         App::getInstanceRouter()->setBasePath($path);
        }
 
        public static function matcher()
        {
-          $match =App::getInstanceRouter()->match();
+          $match = App::getInstanceRouter()->match();
    
           if($match && is_callable($match['target']))
             {

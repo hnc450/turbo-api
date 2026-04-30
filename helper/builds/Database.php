@@ -10,7 +10,7 @@ class Database
 
     public function __construct()
     {
-        $this->config = require dirname(__DIR__, 2).'/config/database.php';
+        $this->config = require dirname(__DIR__, 2). DIRECTORY_SEPARATOR .'config'. DIRECTORY_SEPARATOR .'database.php';
     }
 
     public static function Instance(): self
@@ -36,21 +36,31 @@ class Database
 
     public function query(string $request)
     {
-        $smt = $this->connexion->query($request);
-        return $smt;
+        try
+        {
+            $smt = $this->connexion->query($request);
+            return $smt;
+        } 
+        catch (\PDOException $e) 
+        {
+            error_log($e->getMessage());
+        }
+    
     }
 
-    public function prepare(string $request, $params = [])
+    public function prepare(string $request,array $params = [])
     {
-        try {
+        try 
+        {
             $smt = $this->connexion->prepare($request);
             $smt->execute($params);
             return $smt;
-        } catch (\PDOException $e) {
-            // error_log($e->getMessage());
-            // throw $e;
+        } 
+        catch (\PDOException $e)
+        {
+            error_log($e->getMessage());
+            
         }
-
 
     }
 }

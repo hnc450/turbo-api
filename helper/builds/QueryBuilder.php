@@ -8,15 +8,16 @@ use Helper\Build\Database;
 
 class QueryBuilder
 {
-    private $facadeRequest;
+    private string $facadeRequest;
 
-    public function from(string $table, string $columns = "")
+    public function select(){
+        $this->facadeRequest = "SELECT ";
+        return $this;
+    }
+
+    public function from(string $table)
     {
-
-        Stringy::filled($columns) ?
-         $this->facadeRequest = "SELECT {$columns} FROM {$table}"
-         :
-         $this->facadeRequest = "SELECT * FROM {$table}";
+        $this->facadeRequest = " FROM {$table}";
         return $this;
     }
 
@@ -26,7 +27,7 @@ class QueryBuilder
         return $this;
     }
 
-    public function delete($table)
+    public function delete(string $table)
     {
         $this->facadeRequest  = "DELETE FROM {$table} ";
         return $this;

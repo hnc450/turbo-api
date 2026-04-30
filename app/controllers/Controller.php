@@ -3,7 +3,7 @@
 namespace App\controllers;
 
 use Container\Dic;
-use Helper\Build\QueryBuilder;
+use Helper\Build\Query;
 
 class Controller
 {
@@ -28,7 +28,7 @@ class Controller
         return self::instance();
     }
 
-    public static function json($array)
+    public static function json(array $array)
     {
         header("Content-Type:application/json");
         echo json_encode($array, JSON_PRETTY_PRINT);
@@ -52,8 +52,14 @@ class Controller
     public function update()
     {
     }
-    public function get($table, $column, $value)
+    
+    public function get(string $table, mixed $column,  mixed $value)
     {
-        return Dic::get(QueryBuilder::class)->from($table)->where($column, $value)->run();
+        $table = preg_replace('/[^a-zA-Z0-9_]/', '', $table);
+        $column = preg_replace('/[^a-zA-Z0-9_]/', '', $column);
+
+        return Dic::get(Query::class)->fetch("SELECT * FROM {$table} WHERE {$column} = :val", [
+            ':val' => $value
+        ]);
     }
 }

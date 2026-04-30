@@ -8,7 +8,10 @@ use Helper\Build\Query;
     protected string $table = "models";
 
     public function all(){
-      return Dic::get(Query::class)->get($this->table);
+      return Dic::get(Query::class)->get('SELECT * FROM '.$this->table);
+    }
+    public function quantity(){
+      return Dic::get(Query::class)->fetch('SELECT COUNT(id) as quantity FROM '.$this->table)['quantity'];
     }
   }
 ?>

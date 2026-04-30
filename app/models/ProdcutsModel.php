@@ -1,12 +1,12 @@
 <?php 
- namespace App\models;
+namespace App\models;
  
 use Container\Dic;
 use Helper\Build\Query;
 use Helper\String\Stringy;
 
  class ProdcutsModel extends Model {
-    protected string $table = "products";
+   protected string $table = "products";
      
    public string $name;
    public string $description;
@@ -17,7 +17,7 @@ use Helper\String\Stringy;
    
    public function save() {
         
-            Dic::get(Query::class)->insert("INSERT INTO $this->table(uuid,name,description,price,`quantity`,boutique_id,`category_id`) 
+    Dic::get(Query::class)->insert("INSERT INTO $this->table(uuid,name,description,price,quantity,boutique_id,category_id) 
                  VALUES (:uuid, :name, :describe,:price, :qty, :btq, :cat)", [
                 ':uuid' => Stringy::randUUID(10),
                 ':name' => $this->name,

@@ -4,5 +4,5 @@
   use Router\Router;
 
 
-  Router::get('/',[HomeController::class,'index']);  
+  //Router::get('/',[HomeController::class,'index']);  
 ?>

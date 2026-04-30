@@ -15,16 +15,18 @@ class BoutiqueController extends Controller
 
     public function create()
     {
-        $boutique = new \App\models\BoutiqueModel();
+        // $boutique = new \App\models\BoutiqueModel();
 
-        $boutique->name = "Test de la boutique 3";
-        $boutique->describe = "Une boutique 3 boutique pour un premier test";
-        $boutique->seller_id = 1;
-        $boutique->market_id = 2;
+        // $faker = \Faker\Factory::create('fr_FR');
+    
+        //     $boutique->name = $faker->company;
+        //     $boutique->describe = $faker->text();
+        //     $boutique->seller_id = $faker->numberBetween(11, 30);
+        //     $boutique->market_id = $faker->numberBetween(1, 50);
+        //       $boutique->save();
+    
 
-        $boutique->save();
-
-        self::status(200)->json([
+        self::status(201)->json([
           'message' => 'shop create with success'
         ]);
 
@@ -33,7 +35,7 @@ class BoutiqueController extends Controller
     {
         $uuid = (string)$uuid['uuid'];
 
-        if ($this->get("products", "uuid", $uuid)) {
+        if ($this->get("boutiques", "uuid", $uuid)) {
             Dic::get(QueryBuilder::class)->delete('boutiques')->where("uuid", $uuid)->run();
             $this->status(201)->json(['message' => 'boutique deleted with successfully']);
             return;
