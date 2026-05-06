@@ -3,3 +3,4 @@ composer.lock
 composite
 composite.exe
 .php-cs.fixer.cache
+.env
