@@ -1,10 +1,11 @@
 services:
    backend:
+      image: .
       build: .
       ports:
          - "8000:8000"
       volumes:
-         - ./:/home
+         - ./:/home/turbo
       depends_on:
         - database
       
